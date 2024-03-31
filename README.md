@@ -1,8 +1,8 @@
-# footy-poty
+# Footy-POTY (Football Player of the Season)
 
 A web app that tracks the top goal scorers from the Top 5 European football leagues.
 
-Data supplied from [API-Football](https://www.api-football.com/)
+Data supplied from [API-Football](https://www.api-football.com/).
 
 ## Project Setup
 
