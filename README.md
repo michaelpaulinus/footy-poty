@@ -2,7 +2,7 @@
 
 A web app that tracks the top goal scorers from the Top 5 European football leagues.
 
-Data supplied from [text](https://www.api-football.com/)
+Data supplied from [API-Football](https://www.api-football.com/)
 
 ## Project Setup
 
