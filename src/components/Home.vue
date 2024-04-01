@@ -78,17 +78,17 @@
                 >
                   <p>
                     <v-icon icon="mdi-soccer-field"></v-icon>—{{
-                      item.statistics.games.appearences
+                      item.statistics[0].games.appearences
                     }}
                   </p>
                   <p>
                     <v-icon icon="mdi-soccer"></v-icon>—{{
-                      item.statistics.goals.total
+                      item.statistics[0].goals.total
                     }}
                   </p>
                   <p>
                     <v-icon icon="mdi-handshake"></v-icon>—{{
-                      item.statistics.goals.assists
+                      item.statistics[0].goals.assists
                     }}
                   </p>
                 </v-row>
@@ -103,7 +103,7 @@
 
 <script lang="ts">
 import { getDataService } from "@/services/GetDataService";
-import type playerItem from "@/interfaces/playerItem";
+import type PlayerItem from "@/interfaces/PlayerItem";
 import { scorerData } from "@/data/scorerData";
 
 export default {
@@ -116,7 +116,7 @@ export default {
     return {
       defaultLeague: 39,
       defaultSeason: new Date().getFullYear() - 1,
-      topScorers: [] as playerItem[],
+      topScorers: [] as PlayerItem[],
       seasons: [] as number[],
       isLoading: true,
       leagues: [
@@ -159,7 +159,8 @@ export default {
       getDataService
         .getTopScorers(this.defaultSeason, this.defaultLeague)
         .then((response) => {
-          this.topScorers = response;
+          console.log(response.data.response);
+          this.topScorers = response.data.response;
           this.topScorers.splice(5);
         })
         .catch((err) => {
@@ -206,3 +207,4 @@ h1 {
   background-position: center center;
 }
 </style>
+@/interfaces/PlayerItem
