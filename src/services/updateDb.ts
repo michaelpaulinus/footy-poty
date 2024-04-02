@@ -44,5 +44,5 @@ async function updateSeason(leagueId: number, seasonId: number) {
 const seasonId = new Date().getFullYear() - 1;
 
 leagues.forEach(async (league) => {
-  updateSeason(league.value, seasonId);
+  await updateSeason(league.value, seasonId);
 });
