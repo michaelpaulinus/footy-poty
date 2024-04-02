@@ -26,6 +26,19 @@ class GetDataService {
 
     const players = querySnapshot.docs.map((doc) => doc.data());
 
+    players.sort((a, b) => {
+      const goalsA = a.statistics[0]?.goals.total || 0;
+      const goalsB = b.statistics[0]?.goals.total || 0;
+      const assistsA = a.statistics[0]?.goals.assists || 0;
+      const assistsB = b.statistics[0]?.goals.assists || 0;
+
+      if (goalsB !== goalsA) {
+        return goalsB - goalsA;
+      } else {
+        return assistsB - assistsA;
+      }
+    });
+
     players.splice(5);
 
     return players;
