@@ -12,10 +12,6 @@ export default [
     value: 178,
   },
   {
-    name: "Holland",
-    value: 88,
-  },
-  {
     name: "Spain",
     value: 140,
   },
