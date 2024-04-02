@@ -13,7 +13,10 @@ async function createDb() {
 
     const seasonsRef = collection(leagueDocRef, "seasons");
 
-    const seasonsData: number[] = await getDataService.getSeasonsApi();
+    let seasonsData: number[] = await getDataService.getSeasonsApi();
+    seasonsData = seasonsData.filter((val: number) => {
+      return val <= new Date().getFullYear() - 1;
+    });
 
     seasonsData.forEach(async (season) => {
       const seasonDocRef = doc(seasonsRef, season.toString());
