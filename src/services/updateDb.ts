@@ -1,6 +1,12 @@
 import db from "@/services/firebaseConn";
 import { getDataService } from "@/services/GetDataService";
-import { collection, getDocs, setDoc, deleteDoc } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getDocs,
+  setDoc,
+  deleteDoc,
+} from "firebase/firestore";
 import leagues from "@/data/leagues";
 
 async function deletePlayersInSeason(leagueId: number, seasonId: number) {
@@ -24,11 +30,10 @@ async function addPlayersInSeason(leagueId: number, seasonId: number) {
     `leagues/${leagueId}/seasons/${seasonId}/players`
   );
 
-  const playersSnapshot = await getDocs(playersRef);
-
-  playersSnapshot.forEach(async (playerDoc) => {
-    await setDoc(playerDoc.ref, playerData);
-  });
+  for (const player of playerData) {
+    const playerDocRef = doc(playersRef, player.player.id.toString());
+    await setDoc(playerDocRef, player);
+  }
 }
 
 async function updateSeason(leagueId: number, seasonId: number) {
