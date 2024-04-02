@@ -103,8 +103,7 @@
 
 <script lang="ts">
 import { getDataService } from "@/services/GetDataService";
-import type PlayerItem from "@/interfaces/PlayerItem";
-import { scorerData } from "@/data/scorerData";
+import leagues from "@/data/leagues";
 
 export default {
   mounted() {
@@ -116,73 +115,33 @@ export default {
     return {
       defaultLeague: 39,
       defaultSeason: new Date().getFullYear() - 1,
-      topScorers: [] as PlayerItem[],
-      seasons: [] as number[],
+      topScorers: [] as any[],
+      seasons: [] as any[],
       isLoading: true,
-      leagues: [
-        {
-          name: "England",
-          value: 39,
-        },
-        {
-          name: "France",
-          value: 61,
-        },
-        {
-          name: "Germany",
-          value: 178,
-        },
-        {
-          name: "Holland",
-          value: 88,
-        },
-        {
-          name: "Spain",
-          value: 140,
-        },
-        {
-          name: "UCL",
-          value: 2,
-        },
-        {
-          name: "World Cup",
-          value: 1,
-        },
-      ],
+      leagues: leagues,
     };
   },
 
   methods: {
-    getTopScorers() {
+    async getTopScorers() {
       this.isLoading = true;
 
-      getDataService
-        .getTopScorers(this.defaultSeason, this.defaultLeague)
-        .then((response) => {
-          console.log(response.data.response);
-          this.topScorers = response.data.response;
-          this.topScorers.splice(5);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      this.topScorers = await getDataService.getTopScorersDb(
+        this.defaultSeason,
+        this.defaultLeague
+      );
 
       this.isLoading = false;
     },
 
-    getSeasons() {
-      getDataService
-        .getSeasons()
-        .then((response) => {
-          this.seasons = response.filter((val: number) => {
-            return val <= this.defaultSeason;
-          });
-          this.seasons.reverse();
-          this.defaultSeason = this.seasons[0];
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+    async getSeasons() {
+      this.seasons = await getDataService.getSeasonsDb(this.defaultLeague);
+
+      this.seasons = this.seasons.filter((val: number) => {
+        return val <= this.defaultSeason;
+      });
+      this.seasons.reverse();
+      this.defaultSeason = this.seasons[0];
     },
   },
 };
@@ -207,4 +166,3 @@ h1 {
   background-position: center center;
 }
 </style>
-@/interfaces/PlayerItem
