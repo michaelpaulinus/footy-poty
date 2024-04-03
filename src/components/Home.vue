@@ -1,8 +1,15 @@
 <template>
   <v-container class="hero" fluid>
     <div class="header" style="display: flex; justify-content: center">
-      <h1 style="font-weight: 700; font-size: 3em">
-        FOOTY POTY! <v-icon icon="mdi-medal"></v-icon>
+      <h1
+        style="
+          font-weight: 700;
+          font-size: 3em;
+          display: flex;
+          justify-content: center;
+        "
+      >
+        FOOTY <v-img src="/images/football-award.png" width="50"></v-img> POTY
       </h1>
     </div>
 
@@ -148,7 +155,6 @@ export default {
 
 <style scoped>
 h1 {
-  margin: auto;
   font-size: xx-large;
 }
 
