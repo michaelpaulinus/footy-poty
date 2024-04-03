@@ -15,8 +15,10 @@ async function createDb() {
 
     var seasonsData: number[] = await getDataService.getSeasonsApi();
     seasonsData = seasonsData.filter((val: number) => {
-      return val <= new Date().getFullYear() - 1;
+      return val <= new Date().getFullYear() - 1 && val >= 2010;
     });
+
+    console.log("Seasons found: ", seasonsData);
 
     seasonsData.forEach(async (season) => {
       const seasonDocRef = doc(seasonsRef, season.toString());
@@ -33,7 +35,10 @@ async function createDb() {
       playerData.forEach(async (player: any) => {
         const playerDocRef = doc(playerRef, player.player.id.toString());
         await setDoc(playerDocRef, player);
+        console.log("players added");
       });
+
+      console.log("added seasons: ", season);
     });
   });
 }
