@@ -39,6 +39,7 @@
         rounded
         :model-value="defaultSeason"
         :items="seasons"
+        :item-title="(v) => v + '/' + (v + 1 - 2000)"
         :item-value="(v) => v"
         @update:model-value="
           (v) => {
