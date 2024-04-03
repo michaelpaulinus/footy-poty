@@ -2,7 +2,7 @@
   <v-container class="hero" fluid>
     <div class="header" style="display: flex; justify-content: center">
       <h1 style="font-weight: 700; font-size: 3em">
-        FOOTY POTY! <v-icon icon="mdi-trophy"></v-icon>
+        FOOTY POTY! <v-icon icon="mdi-medal"></v-icon>
       </h1>
     </div>
 
@@ -54,9 +54,7 @@
     <br />
 
     <div>
-      <h2 style="display: flex; justify-content: center">
-        TOP SCORERS <v-icon icon="mdi-soccer"></v-icon>
-      </h2>
+      <h2 style="display: flex; justify-content: center">TOP SCORERS</h2>
 
       <br />
 
