@@ -25,4 +25,4 @@ jobs:
         run: npm run build
 
       - name: Run script
-        run: node ./dist/src/services/updateDb.js
+        run: npx tsx ./src/services/updateDb.ts
