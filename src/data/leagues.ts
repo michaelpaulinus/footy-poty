@@ -7,10 +7,10 @@ export default [
     name: "France",
     value: 61,
   },
-  {
-    name: "Germany",
-    value: 178,
-  },
+  // {
+  //   name: "Germany",
+  //   value: 178,
+  // },
   {
     name: "Italy",
     value: 135,
