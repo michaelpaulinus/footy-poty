@@ -1,4 +1,4 @@
-import type PlayerItem from "./PlayerItem";
+import type PlayerItem from "@/interfaces/PlayerItem";
 
 export default interface ResponseItem {
   get: string;
