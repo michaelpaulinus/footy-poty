@@ -5,7 +5,7 @@ const configAPI = {
   headers: {
     Accept: "application/json; charset=utf-8",
     "Content-Type": "application/json; charset=utf-8",
-    "x-apisports-key": "257af45136d59ded90a701ff2923a610",
+    "x-apisports-key": import.meta.env.VITE_X_APISPORTS_KEY,
   },
 };
 
