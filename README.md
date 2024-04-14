@@ -4,6 +4,8 @@ A web app that tracks the top goal scorers from the Top 5 European football leag
 
 Data supplied from [API-Football](https://www.api-football.com/).
 
+The app can be accessed here: https://footy-poty.netlify.app/
+
 ## Project Setup
 
 ```sh
