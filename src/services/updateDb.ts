@@ -1,5 +1,5 @@
-import db from "@/services/firebaseConn.js";
-import { getDataService } from "@/services/GetDataService.js";
+import db from "@/services/firebaseConn";
+import { getDataService } from "@/services/GetDataService";
 import {
   collection,
   doc,
