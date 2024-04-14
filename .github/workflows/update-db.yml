@@ -22,10 +22,7 @@ jobs:
         run: npm install
 
       - name: "Create env file"
-        run: |
-          touch .env
-          echo ${{secrets.ENV_FILE}} >> .env
-          cat .env
+        run: echo "${{secrets.ENV_FILE}}" > .env
 
       - name: Build TypeScript
         run: npm run build
