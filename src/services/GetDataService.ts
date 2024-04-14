@@ -1,5 +1,5 @@
-import { httpClient } from "@/services/baseHttpClient";
-import db from "@/services/firebaseConn";
+import { httpClient } from "./baseHttpClient";
+import db from "./firebaseConn";
 import { collection, getDocs, query } from "firebase/firestore";
 
 class GetDataService {

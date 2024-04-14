@@ -1,5 +1,5 @@
-import db from "@/services/firebaseConn";
-import { getDataService } from "@/services/GetDataService";
+import db from "./firebaseConn";
+import { getDataService } from "./GetDataService";
 import {
   collection,
   doc,
@@ -7,7 +7,7 @@ import {
   setDoc,
   deleteDoc,
 } from "firebase/firestore";
-import leagues from "@/data/leagues";
+import leagues from "../data/leagues";
 
 async function deletePlayersInSeason(leagueId: number, seasonId: number) {
   const playersRef = collection(

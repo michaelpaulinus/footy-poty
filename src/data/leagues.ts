@@ -1,12 +1,12 @@
 export default [
-  {
-    name: "England",
-    value: 39,
-  },
   // {
-  //   name: "France",
-  //   value: 61,
+  //   name: "England",
+  //   value: 39,
   // },
+  {
+    name: "France",
+    value: 61,
+  },
   // {
   //   name: "Germany",
   //   value: 178,
