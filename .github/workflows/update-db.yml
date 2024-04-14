@@ -1,9 +1,8 @@
 name: Update Season Database
 
 on:
-  push
-  # schedule:
-  # - cron: "0 */12 * * *" # Runs every 12 hours
+  schedule:
+    - cron: "0 */6 * * *" # Runs every 6 hours
 
 jobs:
   update-db:
