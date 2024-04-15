@@ -68,7 +68,12 @@
       <div>
         <v-row style="display: flex; justify-content: space-evenly">
           <v-col
-            cols="2"
+            cols="12"
+            xs="6"
+            sm="6"
+            md="4"
+            lg="2"
+            xl="2"
             v-for="(item, index) in topScorers"
             style="display: flex; justify-content: center"
           >
