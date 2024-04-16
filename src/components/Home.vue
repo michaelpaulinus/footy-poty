@@ -80,8 +80,15 @@
             <v-card width="200" rounded elevation="12" :loading="isLoading">
               <v-img :src="item.player.photo"></v-img>
               <v-card-title style="display: flex; justify-content: center">
-                ({{ index + 1 }}) {{ item.player.name }}</v-card-title
-              >
+                <p>{{ item.player.name }}</p>
+                <v-img
+                  :src="item.statistics[0].team.logo"
+                  max-width="24px"
+                  max-height="24px"
+                  width="24px"
+                  height="24px"
+                ></v-img>
+              </v-card-title>
               <v-card-text>
                 <v-row
                   align-content="space-evenly"
