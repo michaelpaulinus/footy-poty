@@ -41,7 +41,13 @@ async function updateSeason(leagueId: number, seasonId: number) {
   await addPlayersInSeason(leagueId, seasonId);
 }
 
-const seasonId = new Date().getFullYear() - 1;
+let seasonId: number;
+
+if (new Date().getMonth() >= 8) {
+  seasonId = new Date().getFullYear();
+} else {
+  seasonId = new Date().getFullYear() - 1;
+}
 
 leagues.forEach(async (league) => {
   await updateSeason(league.value, seasonId);
