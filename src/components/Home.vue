@@ -122,6 +122,7 @@
 <script lang="ts">
 import { getDataService } from "@/services/GetDataService";
 import leagues from "@/data/leagues";
+import type PlayerItem from "@/interfaces/PlayerItem";
 
 export default {
   mounted() {
@@ -133,8 +134,8 @@ export default {
     return {
       defaultLeague: 39,
       defaultSeason: new Date().getFullYear() - 1,
-      topScorers: [] as any[],
-      seasons: [] as any[],
+      topScorers: [] as PlayerItem[],
+      seasons: [] as number[],
       isLoading: true,
       leagues: leagues,
     };

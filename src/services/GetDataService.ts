@@ -1,3 +1,5 @@
+import type ResponseItem from "../interfaces/ResponseItem";
+import type PlayerItem from "../interfaces/PlayerItem";
 import { httpClient } from "./baseHttpClient";
 import db from "./firebaseConn";
 import { collection, getDocs, query } from "firebase/firestore";
@@ -5,7 +7,7 @@ import { collection, getDocs, query } from "firebase/firestore";
 class GetDataService {
   async getTopScorersApi(seasonId: number, leagueId: number) {
     return (
-      await httpClient.get(
+      await httpClient.get<ResponseItem>(
         `players/topscorers?season=${seasonId}&league=${leagueId}`
       )
     ).data.response;
@@ -22,9 +24,12 @@ class GetDataService {
         "players"
       )
     );
+
     const querySnapshot = await getDocs(q);
 
-    const players = querySnapshot.docs.map((doc) => doc.data());
+    const players = querySnapshot.docs.map<PlayerItem>(
+      (doc) => doc.data() as PlayerItem
+    );
 
     players.sort((a, b) => {
       const goalsA = a.statistics[0]?.goals.total || 0;
@@ -51,7 +56,9 @@ class GetDataService {
   async getSeasonsDb(leagueId: number) {
     const q = query(collection(db, "leagues", leagueId.toString(), "seasons"));
     const querySnapshot = await getDocs(q);
-    const seasons = querySnapshot.docs.map((doc) => doc.data().season);
+    const seasons = querySnapshot.docs.map<number>(
+      (doc) => doc.data().season as number
+    );
     return seasons;
   }
 }
