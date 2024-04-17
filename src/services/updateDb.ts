@@ -45,6 +45,6 @@ const seasonId = new Date().getFullYear() - 1;
 
 leagues.forEach(async (league) => {
   await updateSeason(league.value, seasonId);
-  console.log(`updated ${league.name} data for season ${seasonId}`);
+  console.log(`Updated ${league.name} data for season ${seasonId}.`);
   await new Promise((f) => setTimeout(f, 30000));
 });
