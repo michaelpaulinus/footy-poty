@@ -7,7 +7,7 @@
 		data() {
 			return {
 				defaultLeague: 39,
-				defaultSeason: new Date().getFullYear() - 1,
+				defaultSeason: new Date().getFullYear(),
 				topScorers: [] as PlayerItem[],
 				seasons: [] as number[],
 				isLoading: true,
@@ -16,6 +16,18 @@
 		},
 
 		methods: {
+			async getSeasons() {
+				this.seasons = await getDataService.getSeasonsDb(this.defaultLeague);
+
+				this.seasons = this.seasons.filter((val) => {
+					return val <= this.defaultSeason;
+				});
+
+				this.seasons.reverse();
+
+				this.defaultSeason = this.seasons[0];
+			},
+
 			async getTopScorers() {
 				this.isLoading = true;
 
@@ -26,21 +38,11 @@
 
 				this.isLoading = false;
 			},
-
-			async getSeasons() {
-				this.seasons = await getDataService.getSeasonsDb(this.defaultLeague);
-
-				this.seasons = this.seasons.filter((val: number) => {
-					return val <= this.defaultSeason;
-				});
-				this.seasons.reverse();
-				this.defaultSeason = this.seasons[0];
-			},
 		},
 
-		mounted() {
-			this.getSeasons();
-			this.getTopScorers();
+		async mounted() {
+			await this.getSeasons();
+			await this.getTopScorers();
 		},
 	};
 </script>
@@ -89,34 +91,32 @@
 			<v-select
 				label="League"
 				rounded
-				:model-value="defaultLeague"
+				v-model="defaultLeague"
 				:items="leagues"
-				:item-title="(lv) => lv.name"
-				:item-value="(lv) => lv.value"
+				:item-title="(lv: any) => lv.name"
+				:item-value="(lv: any) => lv.value"
 				@update:model-value="
-					(lv) => {
+					(lv: any) => {
 						defaultLeague = lv;
 						getTopScorers();
 					}
 				"
-			>
-			</v-select>
+			/>
 
 			<v-select
 				label="Season"
 				rounded
-				:model-value="defaultSeason"
+				v-model="defaultSeason"
 				:items="seasons"
-				:item-title="(v) => v + '/' + (v + 1 - 2000)"
-				:item-value="(v) => v"
+				:item-title="(v: any) => v + '/' + (v + 1 - 2000)"
+				:item-value="(v: any) => v"
 				@update:model-value="
-					(v) => {
+					(v:any) => {
 						defaultSeason = v;
 						getTopScorers();
 					}
 				"
-			>
-			</v-select>
+			/>
 		</div>
 
 		<br />
