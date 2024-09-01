@@ -1,13 +1,13 @@
 import type Response from "../models/Response";
 import type Player from "../models/Player";
-import { httpClient } from "./baseHttpClient";
+import HttpClient from "./HttpClient";
 import db from "./firebaseConn";
 import { collection, getDocs, query } from "firebase/firestore";
 
 class GetDataService {
 	async getTopScorersApi(seasonId: number, leagueId: number) {
 		return (
-			await httpClient.get<Response>(
+			await HttpClient.get<Response>(
 				`players/topscorers?season=${seasonId}&league=${leagueId}`
 			)
 		).data.response;
@@ -50,7 +50,7 @@ class GetDataService {
 	}
 
 	async getSeasonsApi() {
-		return (await httpClient.get(`leagues/seasons`)).data.response;
+		return (await HttpClient.get(`leagues/seasons`)).data.response;
 	}
 
 	async getSeasonsDb(leagueId: number) {
