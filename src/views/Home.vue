@@ -1,14 +1,14 @@
 <script lang="ts">
 	import { getDataService } from "@/services/GetDataService";
 	import leagues from "@/data/leagues";
-	import type PlayerItem from "@/models/PlayerItem";
+	import type Player from "@/models/Player";
 
 	export default {
 		data() {
 			return {
 				defaultLeague: 39,
 				defaultSeason: new Date().getFullYear(),
-				topScorers: [] as PlayerItem[],
+				topScorers: [] as Player[],
 				seasons: [] as number[],
 				isLoading: true,
 				leagues,

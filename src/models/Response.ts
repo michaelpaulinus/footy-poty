@@ -1,4 +1,4 @@
-import type PlayerItem from "@/models/PlayerItem";
+import type Player from "./Player";
 
 export default interface ResponseItem {
 	get: string;
@@ -6,5 +6,5 @@ export default interface ResponseItem {
 	errors: [];
 	results: number;
 	paging: {};
-	response: PlayerItem[];
+	response: Player[];
 }
