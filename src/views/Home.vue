@@ -2,6 +2,7 @@
 	import { getDataService } from "@/services/GetDataService";
 	import leagues from "@/data/leagues";
 	import type Player from "@/models/Player";
+	import type League from "@/models/League";
 
 	export default {
 		data() {
@@ -93,11 +94,11 @@
 				rounded
 				v-model="defaultLeague"
 				:items="leagues"
-				:item-title="(lv: any) => lv.name"
-				:item-value="(lv: any) => lv.value"
+				:item-title="(lv: League) => lv.name"
+				:item-value="(lv: League) => lv.value"
 				@update:model-value="
-					(lv: any) => {
-						defaultLeague = lv;
+					(lv: League) => {
+						defaultLeague = lv.value;
 						getTopScorers();
 					}
 				"
