@@ -4,11 +4,6 @@
 	import type PlayerItem from "@/interfaces/PlayerItem";
 
 	export default {
-		mounted() {
-			this.getSeasons();
-			this.getTopScorers();
-		},
-
 		data() {
 			return {
 				defaultLeague: 39,
@@ -41,6 +36,11 @@
 				this.seasons.reverse();
 				this.defaultSeason = this.seasons[0];
 			},
+		},
+
+		mounted() {
+			this.getSeasons();
+			this.getTopScorers();
 		},
 	};
 </script>
