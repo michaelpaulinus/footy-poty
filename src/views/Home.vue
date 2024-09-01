@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { getDataService } from "@/services/GetDataService";
 	import leagues from "@/data/leagues";
-	import type PlayerItem from "@/interfaces/PlayerItem";
+	import type PlayerItem from "@/models/PlayerItem";
 
 	export default {
 		data() {
