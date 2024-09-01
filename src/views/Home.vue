@@ -11,7 +11,7 @@
 				topScorers: [] as PlayerItem[],
 				seasons: [] as number[],
 				isLoading: true,
-				leagues: leagues,
+				leagues,
 			};
 		},
 
