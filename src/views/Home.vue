@@ -150,6 +150,17 @@
 		display: flex;
 		flex-direction: row;
 		justify-content: space-evenly;
+		align-items: center;
+	}
+
+	@media (max-width: 900px) {
+		.player-container {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			gap: 2rem;
+		}
 	}
 
 	.hero {
