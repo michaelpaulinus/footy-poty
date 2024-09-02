@@ -109,10 +109,10 @@
 				rounded
 				v-model="defaultSeason"
 				:items="seasons"
-				:item-title="(v: any) => v + '/' + (v + 1 - 2000)"
-				:item-value="(v: any) => v"
+				:item-title="(v: number) => v + '/' + (v + 1 - 2000)"
+				:item-value="(v: number) => v"
 				@update:model-value="
-					(v:any) => {
+					(v:number) => {
 						defaultSeason = v;
 						getTopScorers();
 					}
