@@ -12,7 +12,7 @@
 
 		data() {
 			return {
-				defaultLeague: 39,
+				defaultLeague: { name: "England", value: 39 } as League,
 				defaultSeason: new Date().getFullYear(),
 				topScorers: [] as Player[],
 				seasons: [] as number[],
@@ -23,7 +23,7 @@
 
 		methods: {
 			async getSeasons() {
-				this.seasons = await DataService.getSeasonsDb(this.defaultLeague);
+				this.seasons = await DataService.getSeasonsDb(this.defaultLeague.value);
 
 				this.seasons = this.seasons.filter((val) => {
 					return val <= this.defaultSeason;
@@ -39,7 +39,7 @@
 
 				this.topScorers = await DataService.getTopScorersDb(
 					this.defaultSeason,
-					this.defaultLeague
+					this.defaultLeague.value
 				);
 
 				this.isLoading = false;
@@ -84,14 +84,8 @@
 				rounded
 				v-model="defaultLeague"
 				:items="leagues"
-				:item-title="(lv: League) => lv.name"
-				:item-value="(lv: League) => lv.value"
-				@update:model-value="
-					(lv: League) => {
-						defaultLeague = lv.value;
-						getTopScorers();
-					}
-				"
+				item-title="name"
+				item-value="value"
 			/>
 
 			<v-select
@@ -101,12 +95,6 @@
 				:items="seasons"
 				:item-title="(v: number) => v + '/' + (v + 1 - 2000)"
 				:item-value="(v: number) => v"
-				@update:model-value="
-					(v:number) => {
-						defaultSeason = v;
-						getTopScorers();
-					}
-				"
 			/>
 		</div>
 
