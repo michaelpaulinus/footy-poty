@@ -3,8 +3,13 @@
 	import leagues from "@/data/leagues";
 	import type Player from "@/models/Player";
 	import type League from "@/models/League";
+	import PlayerCard from "@/components/PlayerCard.vue";
 
 	export default {
+		components: {
+			PlayerCard,
+		},
+
 		data() {
 			return {
 				defaultLeague: 39,
@@ -53,37 +58,22 @@
 		class="hero"
 		fluid
 	>
-		<div
-			class="header"
-			style="display: flex; justify-content: center"
-		>
-			<h1
-				style="
-					font-weight: 700;
-					font-size: 3em;
-					display: flex;
-					justify-content: center;
-				"
-			>
+		<div class="header">
+			<h1 style="display: flex; justify-content: center">
 				FOOTY
 				<v-img
 					src="/images/football-award.png"
-					width="50"
-				></v-img>
+					width="3rem"
+				/>
 				POTY
 			</h1>
 		</div>
 
 		<br />
 
-		<div
-			class="description"
-			style="display: flex; justify-content: center"
-		>
-			<p>
-				Your all in one website to keep up with the latest player data from
-				Europe's Top 5 leagues.
-			</p>
+		<div class="description">
+			Your all in one website to keep up with the latest player data from
+			Europe's Top 5 leagues.
 		</div>
 
 		<br />
@@ -123,64 +113,16 @@
 		<br />
 
 		<div>
-			<h2 style="display: flex; justify-content: center">TOP SCORERS</h2>
+			<h2 class="header">TOP SCORERS</h2>
 
 			<br />
 
-			<div>
-				<v-row style="display: flex; justify-content: space-evenly">
-					<v-col
-						cols="12"
-						xs="6"
-						sm="6"
-						md="4"
-						lg="2"
-						xl="2"
-						v-for="(item, index) in topScorers"
-						style="display: flex; justify-content: center"
-					>
-						<v-card
-							width="200"
-							rounded
-							elevation="12"
-							:loading="isLoading"
-						>
-							<v-img :src="item.player.photo"></v-img>
-							<v-card-title style="display: flex; justify-content: center">
-								<p>{{ item.player.name }}</p>
-								<v-img
-									:src="item.statistics[0].team.logo"
-									max-width="24px"
-									max-height="24px"
-									width="24px"
-									height="24px"
-								></v-img>
-							</v-card-title>
-							<v-card-text>
-								<v-row
-									align-content="space-evenly"
-									style="display: flex; justify-content: space-evenly"
-								>
-									<p>
-										<v-icon icon="mdi-soccer-field"></v-icon>—{{
-											item.statistics[0].games.appearences
-										}}
-									</p>
-									<p>
-										<v-icon icon="mdi-soccer"></v-icon>—{{
-											item.statistics[0].goals.total
-										}}
-									</p>
-									<p>
-										<v-icon icon="mdi-handshake"></v-icon>—{{
-											item.statistics[0].goals.assists
-										}}
-									</p>
-								</v-row>
-							</v-card-text>
-						</v-card>
-					</v-col>
-				</v-row>
+			<div class="player-container">
+				<player-card
+					v-for="item in topScorers"
+					:player="item"
+					:is-loading="isLoading"
+				/>
 			</div>
 		</div>
 	</v-container>
@@ -188,11 +130,30 @@
 
 <style scoped>
 	h1 {
-		font-size: xx-large;
+		font-weight: bolder;
+		font-size: 3rem;
+		font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+			"Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+	}
+
+	.header {
+		display: flex;
+		justify-content: center;
+	}
+
+	.description {
+		display: flex;
+		justify-content: center;
 	}
 
 	.selectors {
 		display: flex;
+		justify-content: space-evenly;
+	}
+
+	.player-container {
+		display: flex;
+		flex-direction: row;
 		justify-content: space-evenly;
 	}
 
