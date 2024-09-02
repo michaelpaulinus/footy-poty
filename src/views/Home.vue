@@ -2,7 +2,6 @@
 	import DataService from "@/services/DataService";
 	import leagues from "@/data/leagues";
 	import type Player from "@/models/Player";
-	import type League from "@/models/League";
 	import PlayerCard from "@/components/PlayerCard.vue";
 
 	export default {
@@ -12,7 +11,7 @@
 
 		data() {
 			return {
-				defaultLeague: { name: "England", value: 39 } as League,
+				defaultLeague: 39,
 				defaultSeason: new Date().getFullYear(),
 				topScorers: [] as Player[],
 				seasons: [] as number[],
@@ -23,26 +22,33 @@
 
 		methods: {
 			async getSeasons() {
-				this.seasons = await DataService.getSeasonsDb(this.defaultLeague.value);
+				try {
+					this.seasons = await DataService.getSeasonsDb(this.defaultLeague);
 
-				this.seasons = this.seasons.filter((val) => {
-					return val <= this.defaultSeason;
-				});
+					this.seasons = this.seasons.filter((val) => {
+						return val <= this.defaultSeason;
+					});
 
-				this.seasons.reverse();
+					this.seasons.reverse();
 
-				this.defaultSeason = this.seasons[0];
+					this.defaultSeason = this.seasons[0];
+				} catch (error) {
+					console.error(error);
+				}
 			},
 
 			async getTopScorers() {
-				this.isLoading = true;
-
-				this.topScorers = await DataService.getTopScorersDb(
-					this.defaultSeason,
-					this.defaultLeague.value
-				);
-
-				this.isLoading = false;
+				try {
+					this.isLoading = true;
+					this.topScorers = await DataService.getTopScorersDb(
+						this.defaultSeason,
+						this.defaultLeague
+					);
+				} catch (error) {
+					console.error(error);
+				} finally {
+					this.isLoading = false;
+				}
 			},
 		},
 
@@ -80,21 +86,23 @@
 
 		<div class="selectors">
 			<v-select
+				v-model="defaultLeague"
 				label="League"
 				rounded
-				v-model="defaultLeague"
 				:items="leagues"
 				item-title="name"
 				item-value="value"
+				@update:model-value="getTopScorers()"
 			/>
 
 			<v-select
+				v-model="defaultSeason"
 				label="Season"
 				rounded
-				v-model="defaultSeason"
 				:items="seasons"
 				:item-title="(v: number) => v + '/' + (v + 1 - 2000)"
 				:item-value="(v: number) => v"
+				@update:model-value="getTopScorers()"
 			/>
 		</div>
 
