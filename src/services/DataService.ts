@@ -4,7 +4,7 @@ import HttpClient from "./HttpClient";
 import db from "./firebaseConn";
 import { collection, getDocs, query } from "firebase/firestore";
 
-class GetDataService {
+class DataService {
 	async getTopScorersApi(seasonId: number, leagueId: number) {
 		return (
 			await HttpClient.get<Response>(
@@ -63,4 +63,4 @@ class GetDataService {
 	}
 }
 
-export const getDataService = new GetDataService();
+export default new DataService();

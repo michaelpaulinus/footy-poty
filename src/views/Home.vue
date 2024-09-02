@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { getDataService } from "@/services/GetDataService";
+	import DataService from "@/services/DataService";
 	import leagues from "@/data/leagues";
 	import type Player from "@/models/Player";
 	import type League from "@/models/League";
@@ -18,7 +18,7 @@
 
 		methods: {
 			async getSeasons() {
-				this.seasons = await getDataService.getSeasonsDb(this.defaultLeague);
+				this.seasons = await DataService.getSeasonsDb(this.defaultLeague);
 
 				this.seasons = this.seasons.filter((val) => {
 					return val <= this.defaultSeason;
@@ -32,7 +32,7 @@
 			async getTopScorers() {
 				this.isLoading = true;
 
-				this.topScorers = await getDataService.getTopScorersDb(
+				this.topScorers = await DataService.getTopScorersDb(
 					this.defaultSeason,
 					this.defaultLeague
 				);
