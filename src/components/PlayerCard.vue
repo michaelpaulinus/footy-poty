@@ -40,17 +40,15 @@
 				style="display: flex; justify-content: space-evenly"
 			>
 				<p>
-					<v-icon icon="mdi-soccer-field"></v-icon>—{{
+					<v-icon icon="mdi-soccer-field" />—{{
 						player.statistics[0].games.appearences
 					}}
 				</p>
 				<p>
-					<v-icon icon="mdi-soccer"></v-icon>—{{
-						player.statistics[0].goals.total
-					}}
+					<v-icon icon="mdi-soccer" />—{{ player.statistics[0].goals.total }}
 				</p>
 				<p>
-					<v-icon icon="mdi-handshake"></v-icon>—{{
+					<v-icon icon="mdi-handshake" />—{{
 						player.statistics[0].goals.assists
 					}}
 				</p>
