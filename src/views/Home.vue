@@ -94,7 +94,6 @@
 				item-value="value"
 				@update:model-value="getTopScorers()"
 			/>
-
 			<v-select
 				v-model="defaultSeason"
 				label="Season"
