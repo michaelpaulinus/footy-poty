@@ -3,10 +3,12 @@ import leagues from '@/data/leagues';
 import type Player from '@/models/player';
 import playerCard from '@/components/player-card.vue';
 import statsService from '@/services/stats-service';
+import playerTable from '@/components/player-table.vue';
 
 export default {
 	components: {
 		playerCard,
+		playerTable,
 	},
 
 	data() {
@@ -15,6 +17,7 @@ export default {
 			defaultSeason: new Date().getFullYear(),
 			topScorers: [] as Player[],
 			seasons: [] as number[],
+			isTable: false,
 			isLoading: true,
 			leagues,
 		};
@@ -116,12 +119,24 @@ export default {
 
 		<div>
 			<h2 class="header">TOP SCORERS</h2>
-
 			<br />
-
-			<div class="player-container">
+			<v-switch
+				label="Table"
+				v-model="isTable"
+			/>
+			<br />
+			<div
+				v-if="isTable"
+				class="player-table-container"
+			>
+				<player-table :players="topScorers" />
+			</div>
+			<div
+				v-else
+				class="player-container"
+			>
 				<player-card
-					v-for="item in topScorers"
+					v-for="item in topScorers.slice(0, 5)"
 					:player="item"
 					:is-loading="isLoading"
 				/>
