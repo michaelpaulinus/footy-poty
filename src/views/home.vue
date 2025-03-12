@@ -129,7 +129,10 @@ export default {
 				v-if="isTable"
 				class="player-table-container"
 			>
-				<player-table :players="topScorers" />
+				<player-table
+					:players="topScorers"
+					:is-loading="isLoading"
+				/>
 			</div>
 			<div
 				v-else

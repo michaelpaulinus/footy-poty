@@ -30,5 +30,26 @@ export default defineComponent({
 </script>
 
 <template>
-	<v-data-table :items="mappedPlayers"></v-data-table>
+	<v-data-table
+		:items="mappedPlayers"
+		:loading="isLoading"
+	>
+		<template v-slot:item.photo="{ value }">
+			<v-img
+				:src="value"
+				width="2rem"
+				height="2rem"
+			/>
+		</template>
+
+		<template v-slot:item.team="{ value }">
+			<v-img
+				:src="value"
+				width="2rem"
+				height="2rem"
+			/>
+		</template>
+
+		<template #bottom> </template>
+	</v-data-table>
 </template>
