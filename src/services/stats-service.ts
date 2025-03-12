@@ -1,5 +1,5 @@
 import httpClient from '@/configs/http-client';
-import type Player from '@/models/Player';
+import type Player from '@/models/player-dto';
 
 export class StatsService {
 	async getTopScorers(seasonId: number, leagueId: number) {

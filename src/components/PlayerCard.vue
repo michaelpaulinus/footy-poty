@@ -1,19 +1,19 @@
 <script lang="ts">
-	import { defineComponent } from "vue";
-	import type Player from "@/models/Player";
+import { defineComponent } from 'vue';
+import type Player from '@/models/player-dto';
 
-	export default defineComponent({
-		props: {
-			player: {
-				type: Object as () => Player,
-				required: true,
-			},
-
-			isLoading: {
-				type: Boolean,
-			},
+export default defineComponent({
+	props: {
+		player: {
+			type: Object as () => Player,
+			required: true,
 		},
-	});
+
+		isLoading: {
+			type: Boolean,
+		},
+	},
+});
 </script>
 
 <template>
