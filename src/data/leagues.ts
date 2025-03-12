@@ -1,12 +1,12 @@
-import type League from "@/models/League";
+import type League from '@/models/league-dto';
 
 export default [
 	{
-		name: "England",
+		name: 'England',
 		value: 39,
 	},
 	{
-		name: "France",
+		name: 'France',
 		value: 61,
 	},
 	// {
@@ -14,15 +14,15 @@ export default [
 	//   value: 178,
 	// },
 	{
-		name: "Italy",
+		name: 'Italy',
 		value: 135,
 	},
 	{
-		name: "Spain",
+		name: 'Spain',
 		value: 140,
 	},
 	{
-		name: "UCL",
+		name: 'UCL',
 		value: 2,
 	},
 ] as League[];

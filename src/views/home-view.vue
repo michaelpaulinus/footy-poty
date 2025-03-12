@@ -1,12 +1,12 @@
 <script lang="ts">
 import leagues from '@/data/leagues';
 import type Player from '@/models/player-dto';
-import PlayerCard from '@/components/PlayerCard.vue';
+import playerCard from '@/components/player-card.vue';
 import statsService from '@/services/stats-service';
 
 export default {
 	components: {
-		PlayerCard,
+		playerCard,
 	},
 
 	data() {
@@ -51,8 +51,6 @@ export default {
 						this.defaultLeague
 					)
 				).data;
-
-				console.log('>>>>>>>>>>>>' + this.topScorers);
 			} catch (error) {
 				console.error(error);
 			} finally {
