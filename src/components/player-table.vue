@@ -34,12 +34,15 @@ export default defineComponent({
 		:items="mappedPlayers"
 		:loading="isLoading"
 	>
-		<template v-slot:item.photo="{ value }">
-			<v-img
-				:src="value"
-				width="2rem"
-				height="2rem"
-			/>
+		<template v-slot:item.player="{ value }">
+			<div>
+				<v-img
+					:src="value.photo"
+					width="2rem"
+					height="2rem"
+				/>
+				{{ value.name }}
+			</div>
 		</template>
 
 		<template v-slot:item.team="{ value }">

@@ -4,8 +4,7 @@ import type PlayerTableRow from '@/models/player-table-row';
 function mapPlayersToTableItems(players: Player[]) {
 	return players.map((player) => {
 		return {
-			name: player.player.name,
-			photo: player.player.photo,
+			player: { name: player.player.name, photo: player.player.photo },
 			team: player.statistics[0].team.logo,
 			position: player.statistics[0].games.position,
 			appearences: player.statistics[0].games.appearences,
