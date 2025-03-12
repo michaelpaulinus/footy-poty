@@ -1,62 +1,71 @@
 <script lang="ts">
-	import DataService from "@/services/DataService";
-	import leagues from "@/data/leagues";
-	import type Player from "@/models/Player";
-	import PlayerCard from "@/components/PlayerCard.vue";
+import leagues from '@/data/leagues';
+import type Player from '@/models/Player';
+import PlayerCard from '@/components/PlayerCard.vue';
+import statsService from '@/services/stats-service';
 
-	export default {
-		components: {
-			PlayerCard,
+export default {
+	components: {
+		PlayerCard,
+	},
+
+	data() {
+		return {
+			defaultLeague: 39,
+			defaultSeason: new Date().getFullYear(),
+			topScorers: [] as Player[],
+			seasons: [] as number[],
+			isLoading: true,
+			leagues,
+		};
+	},
+
+	methods: {
+		async getSeasons() {
+			try {
+				this.isLoading = true;
+
+				this.seasons = (await statsService.getSeasons(this.defaultLeague)).data;
+
+				this.seasons = this.seasons.filter((val) => {
+					return val <= this.defaultSeason;
+				});
+
+				this.seasons.reverse();
+
+				this.defaultSeason = this.seasons[0];
+			} catch (error) {
+				console.error(error);
+			} finally {
+				this.isLoading = false;
+			}
 		},
 
-		data() {
-			return {
-				defaultLeague: 39,
-				defaultSeason: new Date().getFullYear(),
-				topScorers: [] as Player[],
-				seasons: [] as number[],
-				isLoading: true,
-				leagues,
-			};
-		},
+		async getTopScorers() {
+			try {
+				this.isLoading = true;
 
-		methods: {
-			async getSeasons() {
-				try {
-					this.seasons = await DataService.getSeasonsDb(this.defaultLeague);
-
-					this.seasons = this.seasons.filter((val) => {
-						return val <= this.defaultSeason;
-					});
-
-					this.seasons.reverse();
-
-					this.defaultSeason = this.seasons[0];
-				} catch (error) {
-					console.error(error);
-				}
-			},
-
-			async getTopScorers() {
-				try {
-					this.isLoading = true;
-					this.topScorers = await DataService.getTopScorersDb(
+				this.topScorers = (
+					await statsService.getTopScorers(
 						this.defaultSeason,
 						this.defaultLeague
-					);
-				} catch (error) {
-					console.error(error);
-				} finally {
-					this.isLoading = false;
-				}
-			},
-		},
+					)
+				).data;
 
-		async mounted() {
-			await this.getSeasons();
-			await this.getTopScorers();
+				console.log('>>>>>>>>>>>>' + this.topScorers);
+			} catch (error) {
+				console.error(error);
+			} finally {
+				this.isLoading = false;
+			}
 		},
-	};
+	},
+
+	async mounted() {
+		await this.getSeasons();
+		await this.getTopScorers();
+	},
+};
 </script>
 
 <template>
@@ -124,50 +133,50 @@
 </template>
 
 <style scoped>
-	h1 {
-		font-weight: bolder;
-		font-size: 3rem;
-		font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-			"Lucida Sans Unicode", Geneva, Verdana, sans-serif;
-	}
+h1 {
+	font-weight: bolder;
+	font-size: 3rem;
+	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
+		'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
 
-	.header {
-		display: flex;
-		justify-content: center;
-	}
+.header {
+	display: flex;
+	justify-content: center;
+}
 
-	.description {
-		display: flex;
-		justify-content: center;
-	}
+.description {
+	display: flex;
+	justify-content: center;
+}
 
-	.selectors {
-		display: flex;
-		justify-content: space-evenly;
-	}
+.selectors {
+	display: flex;
+	justify-content: space-evenly;
+}
 
+.player-container {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+	align-items: center;
+}
+
+@media (max-width: 900px) {
 	.player-container {
 		display: flex;
-		flex-direction: row;
-		justify-content: space-evenly;
+		flex-direction: column;
+		justify-content: center;
 		align-items: center;
+		gap: 2rem;
 	}
+}
 
-	@media (max-width: 900px) {
-		.player-container {
-			display: flex;
-			flex-direction: column;
-			justify-content: center;
-			align-items: center;
-			gap: 2rem;
-		}
-	}
-
-	.hero {
-		min-height: 100%;
-		background: url("/images/pexels-juan-salamanca-61143.jpg");
-		background-size: cover;
-		background-repeat: no-repeat;
-		background-position: center center;
-	}
+.hero {
+	min-height: 100%;
+	background: url('/images/pexels-juan-salamanca-61143.jpg');
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center center;
+}
 </style>
