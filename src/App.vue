@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import homeView from './views/home-view.vue';
+import home from './views/home.vue';
 </script>
 
 <template>
 	<v-app class="app">
-		<homeView />
+		<home />
 	</v-app>
 </template>

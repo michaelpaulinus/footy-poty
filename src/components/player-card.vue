@@ -1,6 +1,6 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
-import type Player from '@/models/player-dto';
+import type Player from '@/models/player';
 
 export default defineComponent({
 	props: {

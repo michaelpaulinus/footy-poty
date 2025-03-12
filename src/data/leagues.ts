@@ -1,4 +1,4 @@
-import type League from '@/models/league-dto';
+import type League from '@/models/league';
 
 export default [
 	{

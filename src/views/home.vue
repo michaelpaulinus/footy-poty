@@ -1,6 +1,6 @@
 <script lang="ts">
 import leagues from '@/data/leagues';
-import type Player from '@/models/player-dto';
+import type Player from '@/models/player';
 import playerCard from '@/components/player-card.vue';
 import statsService from '@/services/stats-service';
 
