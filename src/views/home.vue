@@ -94,37 +94,52 @@ export default {
 
 		<br />
 
-		<div class="selectors">
-			<v-select
-				v-model="defaultLeague"
-				label="League"
-				rounded
-				:items="leagues"
-				item-title="name"
-				item-value="value"
-				@update:model-value="getTopScorers()"
-			/>
-			<v-select
-				v-model="defaultSeason"
-				label="Season"
-				rounded
-				:items="seasons"
-				:item-title="(v: number) => v + '/' + (v + 1 - 2000)"
-				:item-value="(v: number) => v"
-				@update:model-value="getTopScorers()"
-			/>
+		<div class="selectors-and-table-toggle">
+			<div class="selectors">
+				<v-select
+					v-model="defaultLeague"
+					label="League"
+					rounded
+					:items="leagues"
+					item-title="name"
+					item-value="value"
+					@update:model-value="getTopScorers()"
+				/>
+				<v-select
+					v-model="defaultSeason"
+					label="Season"
+					rounded
+					:items="seasons"
+					:item-title="(v: number) => v + '/' + (v + 1 - 2000)"
+					:item-value="(v: number) => v"
+					@update:model-value="getTopScorers()"
+				/>
+			</div>
+			<div class="table-toggle">
+				<v-btn-toggle
+					v-model="isTable"
+					rounded
+					mandatory
+				>
+					<v-btn
+						icon="mdi-grid-large"
+						:value="false"
+					/>
+					<v-btn
+						icon="mdi-list-box-outline"
+						:value="true"
+					/>
+				</v-btn-toggle>
+			</div>
 		</div>
 
 		<br />
 
 		<div>
 			<h2 class="header">TOP SCORERS</h2>
+
 			<br />
-			<v-switch
-				label="Table"
-				v-model="isTable"
-			/>
-			<br />
+
 			<div
 				v-if="isTable"
 				class="player-table-container"
@@ -166,9 +181,20 @@ h1 {
 	justify-content: center;
 }
 
+.selectors-and-table-toggle {
+	display: flex;
+	justify-content: center;
+	/* align-items: center; */
+	justify-content: space-between;
+	width: 100%;
+	gap: 1rem;
+}
+
 .selectors {
 	display: flex;
 	justify-content: space-evenly;
+	align-items: center;
+	width: 100%;
 }
 
 .player-container {
